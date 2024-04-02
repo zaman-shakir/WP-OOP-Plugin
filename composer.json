@@ -1,0 +1,15 @@
+{
+    "name": "shakir/wplgoic-dev",
+    "authors": [
+        {
+            "name": "Shakir Uz Zaman",
+            "email": "zaman.shakirdev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WPlgoic\\Dev\\": "includes/"
+        }
+    },
+    "require": {}
+}

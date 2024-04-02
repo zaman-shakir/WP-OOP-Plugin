@@ -1,7 +1,8 @@
 <?php
 
+
 /**
- * Plugin Name: WpLgoic
+ * Plugin Name: WpLgoic Dev
  * Description: A tutotial plugin to understand how oop works
  * Plugin URI: https://zaman-shakir.xyz
  * Author: Shakir
@@ -13,8 +14,9 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+require_once __DIR__ . '/vendor/autoload.php';
 
-final class WPlgoic
+final class WPlgoic_Dev
 {
     const version = '1.0';
 
@@ -22,27 +24,28 @@ final class WPlgoic
     {
         $this->define_constants();
         register_activation_hook(__FILE__, [$this, 'activate']);
-
+        // require_once(WPlgoic_DEV_PATH . '/includes/Admin.php');
         add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
     public function define_constants()
     {
-        define('WPlgoic_VERSION', self::version);
-        define('WPlgoic_FILE', __FILE__);
-        define('WPlgoic_PATH', __DIR__);
-        define('WPlgoic_URL', plugins_url('', WPlgoic_FILE));
-        define('WPlgoic_ASSETS', WPlgoic_URL . '/assets');
+        define('WPlgoic_DEV_VERSION', self::version);
+        define('WPlgoic_DEV_FILE', __FILE__);
+        define('WPlgoic_DEV_PATH', __DIR__);
+        define('WPlgoic_DEV_URL', plugins_url('', WPlgoic_DEV_FILE));
+        define('WPlgoic_DEV_ASSETS', WPlgoic_DEV_URL . '/assets');
     }
     public function activate()
     {
-        $installed = get_option('wplgoic_installed');
+
+        $installed = get_option('wplgoic_dev_installed');
 
         if (!$installed) {
-            update_option('wplgoic_installed', time());
+            update_option('wplgoic_dev_installed', time());
         }
 
-        update_option('wplgoic_version', WPlgoic_VERSION);
+        update_option('wplgoic_dev_version', WPlgoic_DEV_VERSION);
     }
     /**
      * Initialize the plugin
@@ -53,16 +56,12 @@ final class WPlgoic
     {
 
         if (is_admin()) {
-            new WPlgoic\Admin();
+            new WPlgoic\Dev\Admin();
         } else {
-            new WPlgoic\Frontend();
+            // new WPlgoic\Frontend();
         }
     }
-    /**
-     * Initializes a singleton instance
-     *
-     * @return \WPlgoic
-     */
+
     public static function init()
     {
         static $instance = false;
@@ -74,15 +73,11 @@ final class WPlgoic
         return $instance;
     }
 }
-/**
- * Initializes the main plugin
- *
- * @return \WPlgoic
- */
-function wplgoic()
+
+function wplgoic_dev()
 {
-    return WPlgoic::init();
+    return WPlgoic_Dev::init();
 }
 
 // kick-off the plugin
-wplgoic();
+wplgoic_dev();
