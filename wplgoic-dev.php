@@ -39,13 +39,9 @@ final class WPlgoic_Dev
     public function activate()
     {
 
-        $installed = get_option('wplgoic_dev_installed');
 
-        if (!$installed) {
-            update_option('wplgoic_dev_installed', time());
-        }
-
-        update_option('wplgoic_dev_version', WPlgoic_DEV_VERSION);
+        $installer = new WeDevs\Academy\Installer();
+        $installer->run();
     }
     /**
      * Initialize the plugin

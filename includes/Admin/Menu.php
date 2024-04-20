@@ -13,12 +13,24 @@ class Menu
 
     public function admin_menu()
     {
-        //add_menu_page(__('weDevs Academy', 'wedevs-academy'), __('Academy', 'wedevs-academy'), 'manage_options', 'wedevs-academy', [$this, 'plugin_page'], 'dashicons-welcome-learn-more');
-        add_menu_page(__('WPlgoic', 'wplgoic'), __('WPlgoic M', 'wplgoic'), 'manage_options', 'wplgoic', [$this, 'plugin_page'], 'dashicons-welcome-learn-more');
+        $parent_slug = 'wplgoic';
+        $capability = 'manage_options';
+        add_menu_page(__('WPlgoic', 'wplgoic'), __('WPlgoic Section', 'wplgoic'), 'manage_options', 'wplgoic', [$this, 'plugin_page'], 'dashicons-welcome-learn-more');
+        add_submenu_page($parent_slug, __('Address Book', 'wplgoic'), __('Address Book', 'wplgoic'), $capability, $parent_slug, [$this, 'addressbook_page']);
+        add_submenu_page($parent_slug, __('Settings', 'wplgoic'), __('Settings', 'wplgoic'), $capability, 'wplgoic-settings', [$this, 'settings_page']);
     }
-
+    /**
+     * Render the plugin page
+     *
+     * @return void
+     */
+    public function addressbook_page()
+    {
+        $addressbook = new Addressbook();
+        $addressbook->plugin_page();
+    }
     public function plugin_page()
     {
-        echo 'Hello World';
+        echo 'Settings Page';
     }
 }
