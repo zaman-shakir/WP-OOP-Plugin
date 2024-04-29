@@ -15,7 +15,7 @@ function wd_ac_insert_address($args = [])
         return new \WP_Error('no-name', __('You must provide a name.', 'wedevs-academy'));
     }
 
-    $defaults = [
+    $defaults        =  [
         'name'       => '',
         'address'    => '',
         'phone'      => '',

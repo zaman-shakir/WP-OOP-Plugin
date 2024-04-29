@@ -47,7 +47,8 @@ class Addressbook
      */
     public function form_handler()
     {
-        if (!isset($_POST['submit_address'])) {
+
+        if (!isset($_POST['new_submit_address'])) {
             return;
         }
 
@@ -59,7 +60,7 @@ class Addressbook
             wp_die('Are you cheating?');
         }
 
-        var_dump($_POST);
-        exit;
+        // var_dump($_POST);
+        // exit;
     }
 }
